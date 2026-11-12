@@ -182,4 +182,10 @@ npm run test:e2e
 
 ## Penggunaan AI
 
-AI digunakan untuk brainstorming, membantu debugging, dan membantu membuat file test karena cakupan test cukup banyak. Implementasi dan hasil akhirnya tetap menjadi tanggung jawab saya; saya meninjau dan memahami kode yang dikumpulkan.
+AI tools yang digunakan dalam pengerjaan proyek ini:
+
+- **ChatGPT** — membantu brainstorming, memantapkan pilihan tech stack, dan mendiskusikan pendekatan teknis yang sesuai. ChatGPT juga digunakan untuk membantu proses debugging dan penyusunan README.
+- **Claude** — membantu menyusun script pengujian menggunakan Postman dan Jest.
+- **GitHub Copilot** — membantu proses debugging serta penyusunan dan perapian README.
+
+Seluruh saran dan hasil dari AI ditinjau dan disesuaikan dengan kebutuhan proyek. Saya memahami implementasi yang dikumpulkan dan bertanggung jawab atas hasil akhirnya.
