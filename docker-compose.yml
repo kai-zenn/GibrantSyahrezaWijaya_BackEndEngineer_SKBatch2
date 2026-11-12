@@ -1,0 +1,31 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-applicant_records}
+      POSTGRES_USER: ${POSTGRES_USER:-applicant_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-applicant_local_password}
+    ports:
+      - "${DB_HOST_PORT:-5433}:5432"
+    volumes:
+      - applicant_records_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  api:
+    build: .
+    environment:
+      PORT: "3000"
+      DATABASE_URL: postgresql://${POSTGRES_USER:-applicant_user}:${POSTGRES_PASSWORD:-applicant_local_password}@db:5432/${POSTGRES_DB:-applicant_records}
+    ports:
+      - "${API_HOST_PORT:-3000}:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  applicant_records_data:

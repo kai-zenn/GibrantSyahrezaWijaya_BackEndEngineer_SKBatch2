@@ -1,0 +1,30 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ApplicantStage {
+  APPLIED
+  SCREENING
+  INTERVIEW
+  OFFER
+  HIRED
+  REJECTED
+}
+
+model Applicant {
+  id        String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  fullName  String         @db.VarChar(100)
+  email     String         @db.VarChar(254)
+  position  String         @db.VarChar(120)
+  stage     ApplicantStage @default(APPLIED)
+  createdAt DateTime       @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime       @updatedAt @db.Timestamptz(3)
+
+  @@map("applicants")
+}
